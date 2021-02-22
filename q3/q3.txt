@@ -1,0 +1,6 @@
+The bug is dangling pointers. The linked list is intialized with nodes, and the binary search tree node's are pointers intialized 
+to the elements inside nodes of the linked list. 
+Therefore, when list_delete is called, all the nodes, elements, and the list entirely, get freed. 
+However, the pointers from the tree to the elements still remain, thus leaving dangling pointers. 
+Thus, we need to add reference counting to the elements inside the nodes of the linked list, so when
+list_delete gets called the pointers of the tree nodes won't point to freed memory.
